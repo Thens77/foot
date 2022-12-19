@@ -2,9 +2,11 @@ package ma.emsi.foot.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 import ma.emsi.foot.model.Utilisateur;
 
-public interface UtilisateurService {
+public interface UtilisateurService extends UserDetailsService   {
 	
 	Utilisateur ajouter(Utilisateur utilisateur);
 

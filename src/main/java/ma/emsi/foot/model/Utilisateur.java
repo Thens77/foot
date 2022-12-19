@@ -39,13 +39,12 @@ public class Utilisateur  {
 	@Column(name = "picByte", length = 100000)
 	private byte[] picByte;
 	
-	private boolean isActive ;
 	private boolean isNotLocked ;
 	
 	private String[] autorities ;
 
 	public Utilisateur(String userName, String password, String nom, String prenom, int age, String email,
-			boolean isActive, boolean isNotLocked, List<Role> roles) {
+			 boolean isNotLocked, List<Role> roles) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -54,7 +53,6 @@ public class Utilisateur  {
 		this.age = age;
 		this.email = email;
 
-		this.isActive = isActive;
 		this.isNotLocked = isNotLocked;
 		this.roles = roles;
 	}
@@ -78,12 +76,7 @@ public class Utilisateur  {
 	public void setAutorities(String[] autorities) {
 		this.autorities = autorities;
 	}
-	public boolean isActive() {
-		return isActive;
-	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+	
 	public boolean isNotLocked() {
 		return isNotLocked;
 	}
@@ -117,7 +110,7 @@ public class Utilisateur  {
 	
 	}
 	public Utilisateur(Long id, String userName, String password, String nom, String prenom, int age, String email,
-			 boolean isActive, boolean isNotLocked, String[] autorities, List<Role> roles) {
+			 boolean isNotLocked, String[] autorities, List<Role> roles) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -128,7 +121,6 @@ public class Utilisateur  {
 		this.email = email;
 		
 
-		this.isActive = isActive;
 		this.isNotLocked = isNotLocked;
 		this.autorities = autorities;
 		this.roles = roles;
@@ -200,7 +192,7 @@ public class Utilisateur  {
 	@Override
 	public String toString() {
 		return "Utilisateur [id=" + id + ", userName=" + userName + ", password=" + password + ", nom=" + nom
-				+ ", prenom=" + prenom + ", age=" + age + ", email=" + email  + ", isActive=" + isActive
+				+ ", prenom=" + prenom + ", age=" + age + ", email=" + email 
 				+ ", isNotLocked=" + isNotLocked + ", autorities=" + Arrays.toString(autorities) + ", roles=" + roles
 				+ "]";
 	}

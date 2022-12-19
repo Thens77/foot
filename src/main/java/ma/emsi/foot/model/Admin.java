@@ -14,9 +14,8 @@ public class Admin extends Utilisateur {
 	public Admin() {
 	}
 
-	public Admin(String userName, String password, String nom, String prenom, int age, String email,
-			boolean isActive, boolean isNotLocked, List<Role> roles) {
-		super(userName, password, nom, prenom, age, email, isActive, isNotLocked, roles);
+	public Admin(String userName, String password, String nom, String prenom, int age, String email, boolean isNotLocked, List<Role> roles) {
+		super(userName, password, nom, prenom, age, email, isNotLocked, roles);
 		
 	}
 
@@ -38,8 +37,7 @@ public class Admin extends Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Admin [getAutorities()=" + Arrays.toString(getAutorities()) + ", isActive()=" + isActive()
-				+ ", isNotLocked()=" + isNotLocked() + ", getId()=" + getId() + ", getUserName()=" + getUserName()
+		return "Admin [getAutorities()=" + Arrays.toString(getAutorities()) + ", isNotLocked()=" + isNotLocked() + ", getId()=" + getId() + ", getUserName()=" + getUserName()
 				+ ", getPassword()=" + getPassword() + ", getNom()=" + getNom() + ", getPicByte()="
 				+ Arrays.toString(getPicByte()) + ", getPrenom()=" + getPrenom() + ", getAge()=" + getAge()
 				+ ", getEmail()=" + getEmail() + ", getRoles()=" + getRoles() + ", toString()=" + super.toString()

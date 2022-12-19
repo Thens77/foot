@@ -16,7 +16,8 @@ public class Report {
 	Client client;
 	private String reportMsg;
 	
-	
+	 public Report() {
+		}
 
 	public Report(Client client, String reportMsg) {
 		super();

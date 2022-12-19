@@ -16,7 +16,7 @@ public class Client extends Utilisateur {
 
 	public Client(String userName, String password, String nom, String prenom, int age, String email,
 			boolean isActive, boolean isNotLocked, List<Role> roles) {
-		super(userName, password, nom, prenom, age, email, isActive, isNotLocked, roles);
+		super(userName, password, nom, prenom, age, email, isNotLocked, roles);
 		this.active = isActive;
 		
 	}

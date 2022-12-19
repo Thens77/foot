@@ -16,6 +16,14 @@ public class Creneau {
 	private Time heureDebut ;
 	private Time heureFin ;
 	
+	 public Creneau() {
+		}
+	
+	public Creneau(Time heureDebut, Time heureFin) {
+		super();
+		this.heureDebut = heureDebut;
+		this.heureFin = heureFin;
+	}
 	public Long getId() {
 		return id;
 	}

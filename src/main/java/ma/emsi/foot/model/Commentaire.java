@@ -5,11 +5,13 @@ import java.util.Date;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Commentaire {
 	
 	@Id
@@ -27,6 +29,8 @@ public class Commentaire {
 
 	private String commentaire;
 
+	 public Commentaire() {
+		}
 	
 	public Commentaire(Client client, Club club, Date date, String commentaire) {
 		super();

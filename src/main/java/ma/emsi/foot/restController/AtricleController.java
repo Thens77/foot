@@ -5,16 +5,22 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.foot.error.BadRequestAlertException;
 import ma.emsi.foot.model.Article;
 import ma.emsi.foot.service.ArticleService;
 
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/articles")
 public class AtricleController {
 	
 	
@@ -25,7 +31,7 @@ public class AtricleController {
 	public ResponseEntity<Article> ajouter(@RequestBody Article article) {
 		
         if (article.getId() != null) {
-            throw new BadRequestAlertException("A new boitier cannot already have an ID", "article" , "idexists");
+            throw new BadRequestAlertException("A new article cannot already have an ID", "article" , "idexists");
         }
         Article result = service.ajouter(article);
         
@@ -42,8 +48,8 @@ public class AtricleController {
 	@GetMapping("/delete/{id}")
 	public void supprimer(@PathVariable Long id) {
 		service.supprimer(id);
-
 	}
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Article> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Article  article ) {
 		 if (article.getId() == null) {
@@ -60,4 +66,5 @@ public class AtricleController {
 	        Article result = service.modifier(article,id);
 	        return ResponseEntity.ok(result);
    }
+	
 }

@@ -5,16 +5,23 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.foot.error.BadRequestAlertException;
 import ma.emsi.foot.model.ClientReserv;
 import ma.emsi.foot.service.ClientReservService;
 
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/clientreservations")
 public class ClientReservController {
 	
 	@Autowired
@@ -24,7 +31,7 @@ public class ClientReservController {
 	public ResponseEntity<ClientReserv> ajouter(@RequestBody ClientReserv clientReserv) {
 		
         if (clientReserv.getId() != null) {
-            throw new BadRequestAlertException("A new boitier cannot already have an ID", "" , "idexists");
+            throw new BadRequestAlertException("A new clientreservations cannot already have an ID", "clientreservations" , "idexists");
         }
         ClientReserv result = service.ajouter(clientReserv);
         
@@ -51,14 +58,14 @@ public class ClientReservController {
 	@PutMapping("/{id}")
     public ResponseEntity<ClientReserv> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody ClientReserv clientReserv ) {
 		 if (clientReserv.getId() == null) {
-	            throw new BadRequestAlertException("Invalid id", " ", "idnull");
+	            throw new BadRequestAlertException("Invalid id", "clientreservations ", "idnull");
 	        }
 	        if (!Objects.equals(id, clientReserv.getId())) {
-	            throw new BadRequestAlertException("Invalid ID", "", "idinvalid");
+	            throw new BadRequestAlertException("Invalid ID", "clientreservations", "idinvalid");
 	        }
 
 	        if (service.getClientReserv(id)==null) {
-	            throw new BadRequestAlertException("Entity not found", " ", "idnotfound");
+	            throw new BadRequestAlertException("Entity not found", "clientreservations", "idnotfound");
 	        }
 
 	        ClientReserv result = service.modifier(clientReserv,id);

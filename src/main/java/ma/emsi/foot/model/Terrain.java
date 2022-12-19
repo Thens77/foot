@@ -17,7 +17,7 @@ public class Terrain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	private String size;
 	private int nbrJoueurs;
 	private double prix;
@@ -27,7 +27,8 @@ public class Terrain {
 	@ManyToOne
 	private Club club;
 	
-	
+	 public Terrain() {
+		}
 
 	public Terrain(String size, int nbrJoueurs, double prix, String description, Set<Photos> photos, Club club) {
 		super();
@@ -39,11 +40,11 @@ public class Terrain {
 		this.club = club;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

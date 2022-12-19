@@ -31,7 +31,8 @@ public class Club {
 	 @OneToMany(mappedBy = "club" , fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
 		private Set<Terrain> terrains =new HashSet<Terrain>();
 	 
-	 
+	 public Club() {
+		}
 	 
 	public Club(String idFiscal, String sosName, String description, String clubName, double longitude, double latitude,
 			Proprietaire proprietaire, Set<Photos> photos, Set<Terrain> terrains) {

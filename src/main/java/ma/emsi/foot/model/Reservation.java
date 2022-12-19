@@ -24,7 +24,8 @@ public class Reservation {
 	private Date date;
 	private boolean etat;
 	
-	
+	 public Reservation() {
+		}
 
 	public Reservation(Long nbrjoueur, Client reservedBy, Terrain terrain, Creneau creneau, Date date, boolean etat) {
 		super();

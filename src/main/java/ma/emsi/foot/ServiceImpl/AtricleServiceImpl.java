@@ -29,6 +29,7 @@ public class AtricleServiceImpl implements ArticleService {
 			article2.setDate(article.getDate());
 			article2.setArt(article.getArt());
 			article2.setAdmin(article.getAdmin());
+			article2.setTitre(article.getTitre());
 			return repository.save(article2);
 		}
 		return null;

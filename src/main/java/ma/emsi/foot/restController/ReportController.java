@@ -15,36 +15,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.foot.error.BadRequestAlertException;
-import ma.emsi.foot.model.Panier;
-import ma.emsi.foot.service.PanierService;
+import ma.emsi.foot.model.Report;
+import ma.emsi.foot.service.ReportService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/paniers")
-public class PanierController {
+@RequestMapping("/reports")
+public class ReportController {
 	
 	@Autowired
-	PanierService service;
+	ReportService service;
 
 	@PostMapping
-	public ResponseEntity<Panier> ajouter(@RequestBody Panier panier) {
+	public ResponseEntity<Report> ajouter(@RequestBody Report report) {
 		
-        if (panier.getId() != null) {
-            throw new BadRequestAlertException("A new panier cannot already have an ID", "panier" , "idexists");
+        if (report.getId() != null) {
+            throw new BadRequestAlertException("A new Report cannot already have an ID", "report" , "idexists");
         }
-        Panier result = service.ajouter(panier);
+        Report result = service.ajouter(report);
         return ResponseEntity.ok(result);
 		
 	}
 	
 	@GetMapping
-	public List<Panier> liste() {
+	public List<Report> liste() {
 		return service.liste();
 	}
 
 	@GetMapping("/{id}")
-	public Panier getById(@PathVariable Long id) {
-		return service.getPanier(id);
+	public Report getById(@PathVariable Long id) {
+		return service.getReport(id);
 	}
 
 	@GetMapping("/delete/{id}")
@@ -54,20 +54,21 @@ public class PanierController {
 	}
 	
 	@PutMapping("/{id}")
-    public ResponseEntity<Panier> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Panier panier ) {
-		 if (panier.getId() == null) {
-	            throw new BadRequestAlertException("Invalid id", "panier ", "idnull");
+    public ResponseEntity<Report> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Report report ) {
+		 if (report.getId() == null) {
+	            throw new BadRequestAlertException("Invalid id", "report ", "idnull");
 	        }
-	        if (!Objects.equals(id, panier.getId())) {
-	            throw new BadRequestAlertException("Invalid ID", "panier", "idinvalid");
-	        }
-
-	        if (service.getPanier(id)==null) {
-	            throw new BadRequestAlertException("Entity not found", "panier", "idnotfound");
+	        if (!Objects.equals(id, report.getId())) {
+	            throw new BadRequestAlertException("Invalid ID", "report", "idinvalid");
 	        }
 
-	        Panier result = service.modifier(panier,id);
+	        if (service.getReport(id)==null) {
+	            throw new BadRequestAlertException("Entity not found", " report", "idnotfound");
+	        }
+
+	        Report result = service.modifier(report,id);
 	        return ResponseEntity.ok(result);
     }
+
 
 }

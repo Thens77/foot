@@ -21,7 +21,8 @@ public class Photos {
 	@ManyToOne
 	private Terrain terrain;
 
-	
+	 public Photos() {
+		}
 	public Photos(String url, Club club, Terrain terrain) {
 		super();
 		this.url = url;

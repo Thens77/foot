@@ -11,7 +11,7 @@ import ma.emsi.foot.model.Terrain;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long>{
 	
-	@Query("select r from Reservation r where r.salle.id = ?1 and r.date = ?2 ")
+	@Query("select r from Reservation r where r.terrain.id = ?1 and r.date = ?2 ")
 	List<Reservation> findByTerrainAndDate(Terrain s , Date c);
 
 }

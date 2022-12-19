@@ -18,6 +18,8 @@ public class ClientReserv {
 	 private Panier panier ;
 	 private Long nbr ;
 	 
+	 public ClientReserv() {
+		}
 	public ClientReserv(Reservation reservation, Panier panier, Long nbr) {
 		super();
 		this.reservation = reservation;

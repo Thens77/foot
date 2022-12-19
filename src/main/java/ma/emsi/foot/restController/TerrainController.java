@@ -15,36 +15,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.foot.error.BadRequestAlertException;
-import ma.emsi.foot.model.Panier;
-import ma.emsi.foot.service.PanierService;
+import ma.emsi.foot.model.Terrain;
+import ma.emsi.foot.service.TerrainService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/paniers")
-public class PanierController {
+@RequestMapping("/terrains")
+public class TerrainController {
+
 	
 	@Autowired
-	PanierService service;
+	TerrainService service;
 
 	@PostMapping
-	public ResponseEntity<Panier> ajouter(@RequestBody Panier panier) {
+	public ResponseEntity<Terrain> ajouter(@RequestBody Terrain terrain) {
 		
-        if (panier.getId() != null) {
-            throw new BadRequestAlertException("A new panier cannot already have an ID", "panier" , "idexists");
+        if (terrain.getId() != null) {
+            throw new BadRequestAlertException("A new Terrain cannot already have an ID", "" , "idexists");
         }
-        Panier result = service.ajouter(panier);
+        Terrain result = service.ajouter(terrain);
         return ResponseEntity.ok(result);
 		
 	}
 	
 	@GetMapping
-	public List<Panier> liste() {
+	public List<Terrain> liste() {
 		return service.liste();
 	}
 
 	@GetMapping("/{id}")
-	public Panier getById(@PathVariable Long id) {
-		return service.getPanier(id);
+	public Terrain getById(@PathVariable Long id) {
+		return service.getTerrain(id);
 	}
 
 	@GetMapping("/delete/{id}")
@@ -54,19 +55,19 @@ public class PanierController {
 	}
 	
 	@PutMapping("/{id}")
-    public ResponseEntity<Panier> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Panier panier ) {
-		 if (panier.getId() == null) {
-	            throw new BadRequestAlertException("Invalid id", "panier ", "idnull");
+    public ResponseEntity<Terrain> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Terrain terrain ) {
+		 if (terrain.getId() == null) {
+	            throw new BadRequestAlertException("Invalid id", " Terrain", "idnull");
 	        }
-	        if (!Objects.equals(id, panier.getId())) {
-	            throw new BadRequestAlertException("Invalid ID", "panier", "idinvalid");
-	        }
-
-	        if (service.getPanier(id)==null) {
-	            throw new BadRequestAlertException("Entity not found", "panier", "idnotfound");
+	        if (!Objects.equals(id, terrain.getId())) {
+	            throw new BadRequestAlertException("Invalid ID", "Terrain", "idinvalid");
 	        }
 
-	        Panier result = service.modifier(panier,id);
+	        if (service.getTerrain(id)==null) {
+	            throw new BadRequestAlertException("Entity not found", " Terrain", "idnotfound");
+	        }
+
+	        Terrain result = service.modifier(terrain,id);
 	        return ResponseEntity.ok(result);
     }
 
