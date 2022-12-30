@@ -32,6 +32,7 @@ public class ClubController {
         if (club.getId() != null) {
             throw new BadRequestAlertException("A new club cannot already have an ID", "club" , "idexists");
         }
+        club.setPicByte(service.compressBytes(club.getPicByte()));
         Club result = service.ajouter(club);
         return ResponseEntity.ok(result);
 		
@@ -40,6 +41,11 @@ public class ClubController {
 	@GetMapping
 	public List<Club> liste() {
 		return service.liste();
+	}
+	
+	@GetMapping("prop/{id}")
+	public List<Club> listep(@PathVariable Long id) {
+		return service.getByProprietaire(id);
 	}
 
 	@GetMapping("/{id}")
@@ -55,6 +61,7 @@ public class ClubController {
 	
 	@PutMapping("/{id}")
     public ResponseEntity<Club> modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Club club ) {
+		System.out.println("controlller : " + club);
 		 if (club.getId() == null) {
 	            throw new BadRequestAlertException("Invalid id", "club", "idnull");
 	        }
@@ -66,7 +73,7 @@ public class ClubController {
 	            throw new BadRequestAlertException("Entity not found", "club", "idnotfound");
 	        }
 
-	        Club result = service.modifier(club,id);
+	        Club result = service.modifier(club);
 	        return ResponseEntity.ok(result);
     }
 

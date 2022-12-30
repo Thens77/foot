@@ -1,9 +1,13 @@
 package ma.emsi.foot.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,18 +28,22 @@ public class Club {
 	 private String clubName ; 
 	 private double longitude ;
 	 private double latitude ;
+	 @Column(name = "picByte", length = 100000)
+	private byte[] picByte;
+	 private boolean etat;
 	 @ManyToOne
 	 private Proprietaire proprietaire ;
 	 @OneToMany(mappedBy = "club" , fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
 		private Set<Photos> photos =new HashSet<Photos>();
 	 @OneToMany(mappedBy = "club" , fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
+	 @JsonManagedReference
 		private Set<Terrain> terrains =new HashSet<Terrain>();
 	 
 	 public Club() {
 		}
 	 
 	public Club(String idFiscal, String sosName, String description, String clubName, double longitude, double latitude,
-			Proprietaire proprietaire, Set<Photos> photos, Set<Terrain> terrains) {
+			Proprietaire proprietaire, Set<Photos> photos, Set<Terrain> terrains,byte[] picByte) {
 		super();
 		this.idFiscal = idFiscal;
 		SosName = sosName;
@@ -46,6 +54,7 @@ public class Club {
 		this.proprietaire = proprietaire;
 		this.photos = photos;
 		this.terrains = terrains;
+		this.picByte = picByte ;
 	}
 	public Long getId() {
 		return id;
@@ -107,12 +116,32 @@ public class Club {
 	public void setTerrains(Set<Terrain> terrains) {
 		this.terrains = terrains;
 	}
+	public byte[] getPicByte() {
+		return picByte;
+	}
+
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
+	}
+	
+	
+	public boolean isEtat() {
+		return etat;
+	}
+
+	public void setEtat(boolean etat) {
+		this.etat = etat;
+	}
+
 	@Override
 	public String toString() {
 		return "Club [id=" + id + ", idFiscal=" + idFiscal + ", SosName=" + SosName + ", description=" + description
-				+ ", clubName=" + clubName + ", longitude=" + longitude + ", latitude=" + latitude + ", proprietaire="
-				+ proprietaire + ", photos=" + photos + ", terrains=" + terrains + "]";
+				+ ", clubName=" + clubName + ", longitude=" + longitude + ", latitude=" + latitude + ", picByte="
+				+ Arrays.toString(picByte) + ", etat=" + etat + ", proprietaire=" + proprietaire + ", photos=" + photos
+				+ ", terrains=" + terrains + "]";
 	}
+
+	
 	
 	
 	 

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.foot.error.BadRequestAlertException;
+import ma.emsi.foot.model.Club;
 import ma.emsi.foot.model.Creneau;
+import ma.emsi.foot.service.ClubService;
 import ma.emsi.foot.service.CreneauService;
 
 @RestController
@@ -25,6 +27,9 @@ public class CreneauController {
 	
 	@Autowired
 	CreneauService service;
+	
+	@Autowired
+	ClubService serviceC ;
 
 	@PostMapping
 	public ResponseEntity<Creneau> ajouter(@RequestBody Creneau creneau) {
@@ -40,6 +45,12 @@ public class CreneauController {
 	@GetMapping
 	public List<Creneau> liste() {
 		return service.liste();
+	}
+	
+	@GetMapping("/club/{id}")
+	public List<Creneau> liste2(@PathVariable Long id) {
+		Club c = serviceC.getClub(id);
+		return service.findByClub(c);
 	}
 
 	@GetMapping("/{id}")

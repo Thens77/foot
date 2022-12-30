@@ -2,6 +2,8 @@ package ma.emsi.foot.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
@@ -13,6 +15,7 @@ public class Proprietaire extends Utilisateur {
 
 	public Proprietaire() {
 	}
+
 
 	public Proprietaire(String userName, String password, String nom, String prenom, int age, String email, String cin,
 			boolean isActive, boolean isNotLocked, List<Role> roles) {

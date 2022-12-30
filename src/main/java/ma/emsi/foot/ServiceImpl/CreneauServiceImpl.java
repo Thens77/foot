@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import ma.emsi.foot.model.Club;
 import ma.emsi.foot.model.Creneau;
 import ma.emsi.foot.model.Reservation;
 import ma.emsi.foot.model.Terrain;
@@ -85,6 +86,11 @@ public class CreneauServiceImpl implements CreneauService{
 		 }
 	        
 	        return dispos;
+	}
+
+	@Override
+	public List<Creneau> findByClub(Club c) {
+		return creneauRepository.findByClub(c);
 	}
 	
 

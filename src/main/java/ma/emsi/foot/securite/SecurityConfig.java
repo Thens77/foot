@@ -33,34 +33,28 @@ public class SecurityConfig {
 				.passwordEncoder(bCryptPasswordEncoder).and().build();
 	}
 
-	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-		  http.cors();
-		  http.httpBasic().disable();
-		  http	 
-				   
-	                .csrf(csrf -> csrf.disable())
-	                  
+		  http
+				    .cors().and()
+				    .httpBasic(httpBasic->httpBasic.disable())
+	                .csrf(csrf -> csrf.disable())                  
 	                .authorizeHttpRequests((auth) -> { auth
 	                	.requestMatchers("/authenticate").permitAll()
 	                    .requestMatchers("/creneaux").hasRole("ADMIN")
 	                    .requestMatchers("/articles").hasRole("ADMIN")
+	                    .requestMatchers("/terrains").hasRole("ADMIN")
 	                    .anyRequest().authenticated();
 	                    
 	                });
-	               
-	                               
+		  
 		  http.addFilterBefore(authorizationFilter, UsernamePasswordAuthenticationFilter.class); 
 		  return http.build();
 	    }
 	
-	
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(utilisateurService).passwordEncoder(passwordEncoder);
-		
+		auth.userDetailsService(utilisateurService).passwordEncoder(passwordEncoder);		
 	}
-	
+
 	}
 

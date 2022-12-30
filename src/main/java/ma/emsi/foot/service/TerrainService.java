@@ -15,5 +15,11 @@ public interface TerrainService {
 	Terrain getTerrain(Long id);
 	
 	List<Terrain> liste();
+	
+	List<Terrain> listeByClub(Long id);
+	
+	byte[] decompressBytes(byte[] data);
+
+	byte[] compressBytes(byte[] data);
 
 }

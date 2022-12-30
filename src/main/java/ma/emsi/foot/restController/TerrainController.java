@@ -33,6 +33,7 @@ public class TerrainController {
         if (terrain.getId() != null) {
             throw new BadRequestAlertException("A new Terrain cannot already have an ID", "" , "idexists");
         }
+        terrain.setPicByte(service.compressBytes(terrain.getPicByte()));
         Terrain result = service.ajouter(terrain);
         return ResponseEntity.ok(result);
 		
@@ -41,6 +42,12 @@ public class TerrainController {
 	@GetMapping
 	public List<Terrain> liste() {
 		return service.liste();
+	}
+	
+	
+	@GetMapping("/club/{id}")
+	public List<Terrain> listeByClub(@PathVariable Long id) {
+		return service.listeByClub(id);
 	}
 
 	@GetMapping("/{id}")

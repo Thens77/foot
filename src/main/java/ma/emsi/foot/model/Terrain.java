@@ -3,7 +3,11 @@ package ma.emsi.foot.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
+
 public class Terrain {
 
 	@Id
@@ -25,7 +30,11 @@ public class Terrain {
 	@OneToMany(mappedBy = "terrain", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Photos> photos = new HashSet<Photos>();
 	@ManyToOne
+	@JsonBackReference
 	private Club club;
+	
+	@Column(name = "picByte", length = 100000)
+	private byte[] picByte;
 	
 	 public Terrain() {
 		}
@@ -96,10 +105,19 @@ public class Terrain {
 		this.prix = prix;
 	}
 
+	
+	public byte[] getPicByte() {
+		return picByte;
+	}
+
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
+	}
+
 	@Override
 	public String toString() {
 		return "Terrain [id=" + id + ", size=" + size + ", nbrJoueurs=" + nbrJoueurs + ", prix=" + prix
-				+ ", description=" + description + ", photos=" + photos + ", club=" + club + "]";
+				+ ", description=" + description + ", photos=" + photos+ "]";
 	}
 	
 	
