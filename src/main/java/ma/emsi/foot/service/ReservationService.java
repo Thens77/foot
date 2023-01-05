@@ -18,6 +18,16 @@ public interface ReservationService {
 	
 	List<Reservation> liste();
 	
-	List<Reservation> listeByTerrainAndDate(Terrain t , Date d);
+	List<Reservation> listeByTerrainAndDate(Terrain s , Date d);	
+	
+	List<Reservation> findByTerrain(Terrain t);
+	
+	List<Reservation> findByClub(Long id);	
+	
+	List<Reservation> joinUs();
+	
+	List<Reservation> joinUsbyClub(Long id);
+	
+	List<Reservation> joinUsNum(Long num);
 
 }

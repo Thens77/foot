@@ -11,4 +11,7 @@ public interface ClubRepository extends JpaRepository<Club, Long>{
 
 	@Query("select c from Club c where c.proprietaire.id =?1 ")
 	List<Club>  getByProprietaire(Long id);
+	
+	@Query("select c from Club c where c.etat = 1")
+	List<Club> getVerified();
 }

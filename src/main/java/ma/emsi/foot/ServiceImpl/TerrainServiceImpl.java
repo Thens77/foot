@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import ma.emsi.foot.model.Club;
 import ma.emsi.foot.model.Terrain;
 import ma.emsi.foot.repository.TerrainRepository;
 import ma.emsi.foot.service.TerrainService;
@@ -24,6 +25,7 @@ public class TerrainServiceImpl implements TerrainService {
 
 	@Override
 	public Terrain ajouter(Terrain terrain) {
+		
 		return repository.save(terrain);
 	}
 
@@ -84,24 +86,27 @@ public class TerrainServiceImpl implements TerrainService {
 	}
 	@Override
 	public byte[] compressBytes(byte[] data) {
-		// TODO Auto-generated method stub
-		Deflater deflater = new Deflater();
-		deflater.setInput(data);
-		deflater.finish();
+		if(data!= null) {
+			// TODO Auto-generated method stub
+			Deflater deflater = new Deflater();
+			deflater.setInput(data);
+			deflater.finish();
 
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-		byte[] buffer = new byte[1024];
-		while (!deflater.finished()) {
-			int count = deflater.deflate(buffer);
-			outputStream.write(buffer, 0, count);
-		}
-		try {
-			outputStream.close();
-		} catch (IOException e) {
-		}
-		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+			byte[] buffer = new byte[1024];
+			while (!deflater.finished()) {
+				int count = deflater.deflate(buffer);
+				outputStream.write(buffer, 0, count);
+			}
+			try {
+				outputStream.close();
+			} catch (IOException e) {
+			}
+			System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
 
-		return outputStream.toByteArray();
+			return outputStream.toByteArray();
+		}
+		return null ;
 	}
 
 }

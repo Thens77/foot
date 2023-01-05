@@ -43,6 +43,11 @@ public class ClubController {
 		return service.liste();
 	}
 	
+	@GetMapping("clubDispo")
+	public List<Club> listClubDispo() {
+		return service.getVerifiedClubs();
+	}
+	
 	@GetMapping("prop/{id}")
 	public List<Club> listep(@PathVariable Long id) {
 		return service.getByProprietaire(id);

@@ -11,7 +11,7 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("P")
 public class Proprietaire extends Utilisateur {
 	private String cin ;
-	private boolean active = false;
+	private boolean active ;
 
 	public Proprietaire() {
 	}

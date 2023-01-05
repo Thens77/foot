@@ -41,9 +41,9 @@ public class SecurityConfig {
 	                .csrf(csrf -> csrf.disable())                  
 	                .authorizeHttpRequests((auth) -> { auth
 	                	.requestMatchers("/authenticate").permitAll()
-	                    .requestMatchers("/creneaux").hasRole("ADMIN")
-	                    .requestMatchers("/articles").hasRole("ADMIN")
-	                    .requestMatchers("/terrains").hasRole("ADMIN")
+	                	.requestMatchers("/signup").permitAll()
+	                	.requestMatchers("/signupC").permitAll()
+	                    .requestMatchers("/creneaux").permitAll()
 	                    .anyRequest().authenticated();
 	                    
 	                });

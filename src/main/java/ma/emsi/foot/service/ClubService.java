@@ -21,5 +21,5 @@ public interface ClubService {
 	byte[] decompressBytes(byte[] data);
 
 	byte[] compressBytes(byte[] data);
-
+	public List<Club> getVerifiedClubs();
 }

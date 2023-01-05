@@ -12,6 +12,7 @@ import ma.emsi.foot.model.Club;
 import ma.emsi.foot.model.Creneau;
 import ma.emsi.foot.model.Reservation;
 import ma.emsi.foot.model.Terrain;
+import ma.emsi.foot.repository.ClubRepository;
 import ma.emsi.foot.repository.CreneauRepository;
 import ma.emsi.foot.service.CreneauService;
 import ma.emsi.foot.service.ReservationService;
@@ -25,6 +26,8 @@ public class CreneauServiceImpl implements CreneauService{
 	
 	@Autowired
 	private CreneauRepository creneauRepository;
+	@Autowired
+	private ClubRepository cr ;
 	
 	
 	@Override
@@ -62,11 +65,12 @@ public class CreneauServiceImpl implements CreneauService{
 	
 	@Override
 	public List<Creneau> findDispo(Terrain t , Date d) {
+		 System.out.println("Hey crenn");
 		 List<Creneau>  dispos = new ArrayList<Creneau>();
-
-		
-		
-		 for(Creneau c : creneauRepository.findAll()) {
+		 System.out.println("diiiiiipo " + t.getId());
+		 Club cc = cr.getById(t.getClub().getId()); 
+		 for(Creneau c : creneauRepository.findByClub(t.getClub())) {
+			 
 			 int check=0;
 			 for(Reservation o : reservationService.listeByTerrainAndDate(t,d)) {
 				  check = 0 ;
@@ -84,7 +88,7 @@ public class CreneauServiceImpl implements CreneauService{
 				 dispos.add(c);
 			 }
 		 }
-	        
+		 System.out.println("diiiiiipo " + t.getClub());
 	        return dispos;
 	}
 

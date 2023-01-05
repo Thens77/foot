@@ -27,6 +27,11 @@ public class ClubServiceImpl implements ClubService{
 		club.setEtat(false);
 		return repository.save(club);
 	}
+	
+	@Override
+	public List<Club> getVerifiedClubs(){
+		return repository.getVerified();
+	}
 
 	@Override
 	public Club modifier(Club club) {
@@ -41,6 +46,7 @@ public class ClubServiceImpl implements ClubService{
 			club2.setLatitude(club.getLatitude());
 			club2.setLongitude(club.getLongitude());
 			club2.setSosName(club.getSosName());
+			club2.setEtat(club.isEtat());
 			return repository.save(club2);
 		}
 		return null ;

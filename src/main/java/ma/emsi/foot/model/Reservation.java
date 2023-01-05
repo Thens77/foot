@@ -2,11 +2,15 @@ package ma.emsi.foot.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Reservation {
@@ -16,11 +20,13 @@ public class Reservation {
 	private Long id;
 	private Long nbrjoueur;
 	@ManyToOne
-	private Client reservedBy;
+	private Utilisateur reservedBy;
 	@ManyToOne
 	private Terrain terrain;
 	@ManyToOne
 	private Creneau creneau;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	private boolean etat;
 	
@@ -53,11 +59,11 @@ public class Reservation {
 		this.nbrjoueur = nbrjoueur;
 	}
 
-	public Client getReservedBy() {
+	public Utilisateur getReservedBy() {
 		return reservedBy;
 	}
 
-	public void setReservedBy(Client reservedBy) {
+	public void setReservedBy(Utilisateur reservedBy) {
 		this.reservedBy = reservedBy;
 	}
 

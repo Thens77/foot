@@ -1,5 +1,6 @@
 package ma.emsi.foot.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -117,8 +118,9 @@ public class Terrain {
 	@Override
 	public String toString() {
 		return "Terrain [id=" + id + ", size=" + size + ", nbrJoueurs=" + nbrJoueurs + ", prix=" + prix
-				+ ", description=" + description + ", photos=" + photos+ "]";
+				+ ", description=" + description + ", club=" + club + ", picByte=" + Arrays.toString(picByte) + "]";
 	}
+
 	
 	
 

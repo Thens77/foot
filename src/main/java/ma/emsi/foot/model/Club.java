@@ -138,7 +138,7 @@ public class Club {
 		return "Club [id=" + id + ", idFiscal=" + idFiscal + ", SosName=" + SosName + ", description=" + description
 				+ ", clubName=" + clubName + ", longitude=" + longitude + ", latitude=" + latitude + ", picByte="
 				+ Arrays.toString(picByte) + ", etat=" + etat + ", proprietaire=" + proprietaire + ", photos=" + photos
-				+ ", terrains=" + terrains + "]";
+				 + "]";
 	}
 
 	

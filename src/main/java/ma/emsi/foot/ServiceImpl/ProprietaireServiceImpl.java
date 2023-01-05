@@ -19,6 +19,7 @@ public class ProprietaireServiceImpl implements PropritaireService{
 
 	@Override
 	public Proprietaire ajouter(Proprietaire club) {
+		club.setActive(true);
 		return repository.save(club);
 	}
 

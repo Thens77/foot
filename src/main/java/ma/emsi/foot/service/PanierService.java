@@ -2,7 +2,7 @@ package ma.emsi.foot.service;
 
 import java.util.List;
 
-
+import ma.emsi.foot.model.Client;
 import ma.emsi.foot.model.Panier;
 
 public interface PanierService {
@@ -17,5 +17,6 @@ public interface PanierService {
 	
 	List<Panier> liste();
 	
+	List<Panier> findByClient(Client client);
 
 }

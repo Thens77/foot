@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import ma.emsi.foot.model.Client;
 import ma.emsi.foot.model.Panier;
 import ma.emsi.foot.repository.PanierRepository;
 import ma.emsi.foot.service.PanierService;
@@ -46,6 +47,12 @@ public class PanierServiceImpl implements PanierService{
 	@Override
 	public List<Panier> liste() {
 		return repository.findAll();
+	}
+
+	@Override
+	public List<Panier> findByClient(Client client) {
+		
+		return repository.findByClient(client);
 	}
 
 }

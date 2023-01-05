@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.foot.error.BadRequestAlertException;
 import ma.emsi.foot.model.ClientReserv;
+import ma.emsi.foot.model.Panier;
 import ma.emsi.foot.service.ClientReservService;
+import ma.emsi.foot.service.PanierService;
 
 
 @RestController
@@ -26,6 +28,9 @@ public class ClientReservController {
 	
 	@Autowired
 	ClientReservService service;
+	
+	@Autowired 
+	PanierService panierService ;
 
 	@PostMapping
 	public ResponseEntity<ClientReserv> ajouter(@RequestBody ClientReserv clientReserv) {
@@ -47,6 +52,14 @@ public class ClientReservController {
 	@GetMapping("/{id}")
 	public ClientReserv getById(@PathVariable Long id) {
 		return service.getClientReserv(id);
+	}
+	
+	@GetMapping("/panier/{id}")
+	public List<ClientReserv> findByPanier(@PathVariable Long id) {
+	
+		Panier p = panierService.getPanier(id);
+		
+		return service.findByPanier(p);
 	}
 
 	@GetMapping("/delete/{id}")

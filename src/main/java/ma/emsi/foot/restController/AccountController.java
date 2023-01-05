@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ma.emsi.foot.auth.AuthenticationRequest;
 import ma.emsi.foot.auth.AuthenticationResponse;
 import ma.emsi.foot.model.Client;
+import ma.emsi.foot.model.Proprietaire;
 import ma.emsi.foot.model.Role;
 import ma.emsi.foot.model.Utilisateur;
 import ma.emsi.foot.register.MessageResponse;
@@ -26,6 +27,7 @@ import ma.emsi.foot.repository.RoleRepository;
 import ma.emsi.foot.repository.UtilisateurRepository;
 import ma.emsi.foot.securite.JWTUtils;
 import ma.emsi.foot.service.ClientService;
+import ma.emsi.foot.service.PropritaireService;
 import ma.emsi.foot.service.UtilisateurService;
 
 @RestController
@@ -47,6 +49,9 @@ public class AccountController {
 	
 	@Autowired
 	ClientService clientService ;
+	
+	@Autowired
+	PropritaireService propritaireService ;
 	
 	@Autowired
 	PasswordEncoder encoder;
@@ -84,29 +89,63 @@ public class AccountController {
 		}
 	
 		
-		Role rclient = roleRepo.findById((long) 2).get();
+		Role rclient = roleRepo.findById((long) 3).get();
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(rclient);
 		// Create new user's account
 		
-		Client user = new Client(signUpRequest.getUsername(), 
+		Proprietaire prop = new Proprietaire(signUpRequest.getUsername(), 
 				          encoder.encode(signUpRequest.getPassword()),
 				          signUpRequest.getNom() ,
 				          signUpRequest.getPrenom() ,
 				          signUpRequest.getAge(),
 							 signUpRequest.getEmail(),
+							 signUpRequest.getCin(),
 							 true,
 							 false,
 							 roles
 							);
+				
+		propritaireService.ajouter(prop);
 
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
+	
+	
+
+	@PostMapping("/signupC")
+	public ResponseEntity<?> registerClient( @RequestBody SignupRequest signUpRequest) {
+		if (repository.findByUserName(signUpRequest.getUsername())!=null) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Invalid: cet nom d'utilisateur exist deja!"));
+		}
+
+		if (repository.findByEmail(signUpRequest.getEmail())!=null) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Invalid: cet email exist deja!"));
+		}
 	
 		
-
-	
-
+		Role rclient = roleRepo.findById((long) 3).get();
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(rclient);
+		// Create new user's account
 		
-		clientService.ajouter(user);
+		Client client = new Client(signUpRequest.getUsername(), 
+				          encoder.encode(signUpRequest.getPassword()),
+				          signUpRequest.getNom() ,
+				          signUpRequest.getPrenom() ,
+				          signUpRequest.getAge(),
+							 signUpRequest.getEmail(),
+						
+							 true,
+							 false,
+							 roles
+							);
+				
+		clientService.ajouter(client);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
